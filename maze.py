@@ -18,7 +18,7 @@ def print_pixels(pixels):
     for i in range(height):
         for j in range(width):
             print(pixels[i][j], end=" ")
-        print()
+        print("jjhjhhg")
 
 #im.show()
 
