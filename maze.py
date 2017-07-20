@@ -1,14 +1,11 @@
 from PIL import Image
+import argparse
+import os
 
-im = Image.open('maze_2.gif')
+parser = argparse.ArgumentParser()
 
-
-pixels = list(im.getdata())
-width, height = im.size
-
-
-# getting pixels in tables
-pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
+parser.add_argument("-m", "--maze", help="give me path to maze !!!")
+args = parser.parse_args()
 
 
 def print_pixels(pixels):
@@ -39,12 +36,7 @@ class Node(object):
         return "N" + str(self.id)
 
 
-# cuts white borders around maze
-pixels.pop()
-pixels.pop(0)
-for row in pixels:
-    row.pop(0)
-    row.pop()
+
 
 
 def find_start_stop(pixels):
@@ -376,28 +368,49 @@ def print_path(node, im):
             new_image = print_line(back_node, node, new_image)
     return new_image
 
-# makes node list
-node_list = find_start_stop(pixels) + find_nodes(pixels)
-print("Nodes number: ", len(node_list))
 
-# appends nodes to pixels
-pixels_nodes = append_nodes_to_pixels(pixels, node_list)
-print("Nodes appended to picture")
+if args.maze:
+    im = Image.open(args.maze)
+    pixels = list(im.getdata())
+    width, height = im.size
 
-# creates matrix of relations between nodes
-matrix = create_matrix(pixels, node_list)
-print("Relation matrix created")
+    # getting pixels in tables
+    pixels = [pixels[i * width:(i + 1) * width] for i in range(height)]
 
-# returns node that is at the end of maze
-current_node = dikstras_alghorithm(matrix, node_list)
-print("Path calculated")
+    # cuts white borders around maze
+    pixels.pop()
+    pixels.pop(0)
+    for row in pixels:
+        row.pop(0)
+        row.pop()
 
-# prints path lenght
-print("Path length:", current_node.distance_to_node)
+    # makes node list
+    node_list = find_start_stop(pixels) + find_nodes(pixels)
+    print("Nodes number: ", len(node_list))
 
-# tracks down nodes from end to start and paints paths between them
-new_image = print_path(current_node, im)
-# saves output as new image
-new_image.save('out.bmp')
-print("Image saved !!!")
+    # appends nodes to pixels
+    pixels_nodes = append_nodes_to_pixels(pixels, node_list)
+    print("Nodes appended to picture")
+
+    # creates matrix of relations between nodes
+    matrix = create_matrix(pixels, node_list)
+    print("Relation matrix created")
+
+    # returns node that is at the end of maze
+    current_node = dikstras_alghorithm(matrix, node_list)
+    print("Path calculated")
+
+    # prints path lenght
+    print("Path length:", current_node.distance_to_node)
+
+    # tracks down nodes from end to start and paints paths between them
+    new_image = print_path(current_node, im)
+    # saves output as new image
+    file_dir = os.path.dirname(os.path.realpath(__file__)) + "/out.bmp"
+    print("Image saved at:", file_dir)
+    new_image.save(file_dir)
+    print("Image saved !!!")
+
+else:
+    print("Wrong path")
 
