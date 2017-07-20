@@ -110,7 +110,7 @@ def append_nodes_to_pixels(pixels, node_list):
     return pixels
 
 
-def check_top(node, pixels_nodes, n_width, n_height, matrix):
+def check_top(node, pixels_nodes, n_height, matrix):
     """
     Checks if on the top of current node is another node and mesaures distance
     to it
@@ -137,7 +137,7 @@ def check_top(node, pixels_nodes, n_width, n_height, matrix):
     return matrix
 
 
-def check_bottom(node, pixels_nodes, n_width, n_height, matrix):
+def check_bottom(node, pixels_nodes, matrix):
     """
     The same as in check_top...
     """
@@ -156,7 +156,7 @@ def check_bottom(node, pixels_nodes, n_width, n_height, matrix):
     return matrix
 
 
-def check_right(node, pixels_nodes, n_width, n_height, matrix):
+def check_right(node, pixels_nodes, n_width, matrix):
     """
     The same as in check_top...
     """
@@ -175,7 +175,7 @@ def check_right(node, pixels_nodes, n_width, n_height, matrix):
     return matrix
 
 
-def check_left(node, pixels_nodes, n_width, n_height, matrix):
+def check_left(node, pixels_nodes, matrix):
     """
     The same as in check_top...
     """
@@ -204,10 +204,10 @@ def check_neighbours(node, pixels_nodes, n_width, n_height, matrix):
     :param matrix: matrix - matrix of relations between nodes
     :return: matrix with filled relations for current node
     """
-    matrix = check_top(node, pixels_nodes, n_width, n_height, matrix)
-    matrix = check_bottom(node, pixels_nodes, n_width, n_height, matrix)
-    matrix = check_right(node, pixels_nodes, n_width, n_height, matrix)
-    matrix = check_left(node, pixels_nodes, n_width, n_height, matrix)
+    matrix = check_top(node, pixels_nodes, n_height, matrix)
+    matrix = check_bottom(node, pixels_nodes, matrix)
+    matrix = check_right(node, pixels_nodes, n_width, matrix)
+    matrix = check_left(node, pixels_nodes, matrix)
     return matrix
 
 
