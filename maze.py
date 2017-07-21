@@ -8,19 +8,6 @@ parser.add_argument("-m", "--maze", help="give me path to maze !!!")
 args = parser.parse_args()
 
 
-def print_pixels(pixels):
-    """
-    Prints nested arrays as a matrix
-    :param pixels nested arrays - matrix that represents maze
-    """
-    height = len(pixels)
-    width = len(pixels[0])
-    for i in range(height):
-        for j in range(width):
-            print(pixels[i][j], end=" ")
-        print()
-
-
 class Node(object):
     id = 0
 
@@ -36,9 +23,6 @@ class Node(object):
         return "N" + str(self.id)
 
 
-
-
-
 def find_start_stop(pixels):
     """
     Finds start/end nodes
@@ -48,15 +32,19 @@ def find_start_stop(pixels):
     n_width = len(pixels[0])
     n_height = len(pixels)
     node_list = []
-    for i in range(0, n_height):
+    # search top and bottom row
+    for i in [0, n_height - 1]:
         for j in range(0, n_width):
             current = pixels[i][j]
-            if current == 0 and (i in (0, n_height - 1) or j in (0, n_width - 1)):
+            if current == 0:
                 node = Node(i, j)
-                if node_list:
-                    node.end = True
-                else:
-                    node.start = True
+                node_list.append(node)
+    # search first and last column
+    for k in range(0, n_height):
+        for l in [0, n_width - 1]:
+            current = pixels[k][l]
+            if current == 0:
+                node = Node(k, l)
                 node_list.append(node)
     return node_list
 
@@ -405,6 +393,7 @@ if args.maze:
 
     # tracks down nodes from end to start and paints paths between them
     new_image = print_path(current_node, im)
+
     # saves output as new image
     file_dir = os.path.dirname(os.path.realpath(__file__)) + "/out.bmp"
     print("Image saved at:", file_dir)
