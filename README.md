@@ -6,7 +6,7 @@ Proper mazes can be downloaded from http://hereandabove.com/maze/mazeorig.form.h
 Maze should have only one start and one exit point.  
 
 **To run application:**    
-python3 <path_to_file>/maze.py -m <path to maze file>/maze.gif  
+python3 {path_to_file}/maze.py -m {path to maze file}/maze.gif  
 Output will be saved in directory containing maze.py file.  
 
 
