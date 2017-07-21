@@ -229,7 +229,8 @@ def get_adj_nodes(available_nodes, calculation_nodes, n_matrix, current_node):
     Gets all adjacent and available nodes to current node
     :param available_nodes: list - list of available nodes
     :param n_matrix: nested lists - matrix with relations of nodes
-    :param current_node: VisitedNode class object
+    :param calculation_nodes list - list of all nodes
+    :param current_node: Node class object
     :return: list - list of adjacent nodes
     """
     row = n_matrix[current_node.id]
@@ -245,11 +246,11 @@ def get_adj_nodes(available_nodes, calculation_nodes, n_matrix, current_node):
 def get_min_node(current_node, n_matrix, visited_nodes, calculation_nodes):
     """
     Returns node with minimum distance to start node
-    :param current_node: Calculation Node object
+    :param current_node: Node object
     :param n_matrix: matrix - relation matrix
     :param visited_nodes: list - list with visited nodes
-    :param calculation_nodes:list - list of all calculation nodes
-    :return: Calculation node object with shortest distance to start node
+    :param calculation_nodes: list - list of all calculation nodes
+    :return: Node object with shortest distance to start node
     """
     row = n_matrix[current_node.id]
     current_calculation_node_list = []
@@ -314,10 +315,9 @@ def dikstras_alghorithm(n_matrix, node_list):
 def print_line(node_1, node_2, image):
     """
     Prints red lines between nodes
-    :param node_1: VisitedNode object
-    :param node_2: VisitedNode object
+    :param node_1: Node object
+    :param node_2: Node object
     :param image: image as RGB
-    :param node_list: list - list of all nodes in maze
     :return: image with red lines between visited two nodes
     """
     x1 = node_1.column
@@ -344,7 +344,6 @@ def print_path(node, im):
     Prints path from start to the end of maze
     :param node: VisitedNode - node at the end of maze
     :param im: image of maze
-    :param node_list: list - list of all nodes in maze
     :return: image with printed red lines between all nodes
     """
     new_image = im.convert('RGB')
