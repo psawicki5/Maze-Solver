@@ -8,5 +8,15 @@ Maze should have only one start and one exit point.
 **To run application:**    
 python3 {path_to_file}/maze.py -m {path to maze file}/maze.gif  
 Output will be saved in directory containing maze.py file.  
+  
+#### Maze examples  
+**Input maze**  
+<img src="https://github.com/psawicki5/Maze-Solver/blob/master/solved_maze_example/maze_2.gif?raw=true" alt="Input Maze"></img>  
+  
+**Output**  
+<img src="https://raw.githubusercontent.com/psawicki5/Maze-Solver/master/solved_maze_example/out.bmp" alt="Output"></img>
+
+
+
 
 
